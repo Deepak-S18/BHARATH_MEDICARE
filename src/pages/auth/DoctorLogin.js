@@ -11,16 +11,9 @@ import {
   faUser,
   faLock,
   faEnvelope,
-  faCakeCandles,
-  faExclamationTriangle,
-  faEye,
-  faEyeSlash
+  faCakeCandles
 } from '@fortawesome/free-solid-svg-icons';
-import PasswordToggle from '../../components/PasswordToggle';
-import LoadingOverlay from '../../components/LoadingOverlay';
-import ErrorContainer from '../../components/ErrorContainer';
 import './styles/CommonLogin.css';
-
 
 export default function DoctorLogin() {
   const { isLoaded, isSignedIn, user } = useUser();
@@ -45,7 +38,6 @@ export default function DoctorLogin() {
     password: '',
   });
 
-  // Check localStorage for "Remember Me"
   useState(() => {
     const savedId = localStorage.getItem('doctorId');
     if (savedId) {
@@ -54,7 +46,6 @@ export default function DoctorLogin() {
     }
   }, []);
 
-  // Reset form fields
   const resetForms = () => {
     setLoginIdentifier('');
     setLoginPassword('');
@@ -69,25 +60,21 @@ export default function DoctorLogin() {
     setSignupPasswordVisible(false);
   };
 
-  // Toggle between Login and Signup forms
   const toggleForm = () => {
     setIsLogin(!isLogin);
     setErrorMessage('');
     resetForms();
   };
 
-  // Handle Signup Input Change
   const handleSignupChange = (e) => {
     const { id, value } = e.target;
     setSignupData(prev => ({ ...prev, [id]: value }));
     setErrorMessage('');
   };
 
-  // Toggle Password Visibility
   const toggleLoginPasswordVisibility = () => setLoginPasswordVisible(prev => !prev);
   const toggleSignupPasswordVisibility = () => setSignupPasswordVisible(prev => !prev);
 
-  // Validate Signup Details
   const validateSignup = () => {
     const { fullName, email, specialization, password } = signupData;
     if (!fullName?.trim()) {
@@ -109,7 +96,6 @@ export default function DoctorLogin() {
     return true;
   };
 
-  // Handle Login Submission (Clerk Sign In)
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -125,7 +111,6 @@ export default function DoctorLogin() {
         password: loginPassword,
       });
       if (result.status === 'complete' && result.createdSessionId) {
-        // Successfully signed in
         if (rememberMe) {
           localStorage.setItem('doctorId', loginIdentifier);
         } else {
@@ -143,7 +128,6 @@ export default function DoctorLogin() {
     }
   };
 
-  // Handle Signup Submission (Clerk Sign Up)
   const handleSignup = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -156,7 +140,6 @@ export default function DoctorLogin() {
       const result = await signUp.create({
         emailAddress: signupData.email,
         password: signupData.password,
-        // You can add custom public metadata for "role": "doctor", "specialization", etc.
         unsafeMetadata: {
           role: 'doctor',
           fullName: signupData.fullName,
@@ -164,11 +147,9 @@ export default function DoctorLogin() {
           specialization: signupData.specialization,
         },
       });
-      // Start the sign-up process (Clerk sends a verification email)
       if (result.status === 'complete') {
-        // If email verification is not required, you could auto-sign-in here
         setErrorMessage('Account created! Please check your email to verify.');
-        toggleForm(); // Switch to login
+        toggleForm();
       } else {
         setErrorMessage('Signup failed. Please try again.');
       }
@@ -180,17 +161,14 @@ export default function DoctorLogin() {
     }
   };
 
-  // Google Sign-In (OAuth) via Clerk
   const handleGoogleSignIn = async () => {
     setLoading(true);
     setErrorMessage('');
     try {
       await signIn.authenticateWithRedirect({
         strategy: 'oauth_google',
-        redirectUrl: '/doctor-oauth-callback', // Define this route in your app
-        // Or use authenticateWithPopup for no redirect
+        redirectUrl: '/doctor-oauth-callback',
       });
-      // After OAuth, Clerk will handle the session; user will be redirected back
     } catch (err) {
       console.error('Google sign-in failed:', err);
       setErrorMessage('Google sign-in failed. Please try again.');
@@ -199,14 +177,12 @@ export default function DoctorLogin() {
     }
   };
 
-  // Define sidebar features for Doctor portal
   const features = [
     { icon: <FontAwesomeIcon icon={faUser} />, text: 'View patient analytics' },
     { icon: <FontAwesomeIcon icon={faEnvelope} />, text: 'Manage appointments' },
     { icon: <FontAwesomeIcon icon={faCakeCandles} />, text: 'Prescribe medications' },
   ];
 
-  // If already signed in, redirect to dashboard
   if (isLoaded && isSignedIn) {
     navigate('/doctor-dashboard');
     return null;
@@ -249,11 +225,12 @@ export default function DoctorLogin() {
           </div>
 
           {/* Error Message */}
-          {errorMessage && <ErrorContainer message={errorMessage} />}
+          {errorMessage && <div className="simple-error-message">{errorMessage}</div>}
 
           {/* Forms */}
           <div className="auth-form-wrapper">
-            {loading && <LoadingOverlay />}
+            {/* No LoadingOverlay, just show "Loading..." if needed */}
+            {loading && <div className="simple-loading-overlay">Loading...</div>}
 
             {isLogin ? (
               <form onSubmit={handleLogin} className="auth-form login-form">
@@ -284,10 +261,16 @@ export default function DoctorLogin() {
                       placeholder="Enter your password"
                       required
                     />
-                    <PasswordToggle
-                      isVisible={loginPasswordVisible}
-                      onToggle={toggleLoginPasswordVisibility}
-                    />
+                    {/* Removed PasswordToggle, replaced with simple toggle */}
+                    <button
+                      type="button"
+                      className="password-toggle-btn"
+                      onClick={toggleLoginPasswordVisibility}
+                      tabIndex={-1}
+                      style={{ marginLeft: '8px', background: 'none', border: 'none', cursor: 'pointer' }}
+                    >
+                      <FontAwesomeIcon icon={loginPasswordVisible ? 'eye-slash' : 'eye'} />
+                    </button>
                   </div>
                 </div>
 
@@ -379,10 +362,16 @@ export default function DoctorLogin() {
                       placeholder="Create a secure password"
                       required
                     />
-                    <PasswordToggle
-                      isVisible={signupPasswordVisible}
-                      onToggle={toggleSignupPasswordVisibility}
-                    />
+                    {/* Removed PasswordToggle, replaced with simple toggle */}
+                    <button
+                      type="button"
+                      className="password-toggle-btn"
+                      onClick={toggleSignupPasswordVisibility}
+                      tabIndex={-1}
+                      style={{ marginLeft: '8px', background: 'none', border: 'none', cursor: 'pointer' }}
+                    >
+                      <FontAwesomeIcon icon={signupPasswordVisible ? 'eye-slash' : 'eye'} />
+                    </button>
                   </div>
                 </div>
 

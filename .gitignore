@@ -23,5 +23,3 @@ yarn-error.log*
 # IDEs and editors
 .vscode/
 .idea/
-# logs
-logs/
