@@ -1,0 +1,346 @@
+/* Telemedicine Component Styles */
+.telemedicine-section {
+    font-family: 'Arial', sans-serif;
+    max-width: 100%;
+    margin: 0 auto;
+    color: #333;
+    padding: 1rem;
+}
+
+.telemedicine-section * {
+    box-sizing: border-box;
+}
+
+.telemedicine-title {
+    text-align: center;
+    color: #138808; /* Green */
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    padding-top: 1.5rem;
+    position: relative;
+}
+
+.telemedicine-title::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 3px;
+    background-color: #FF9933; /* Saffron */
+    margin: 0.5rem auto 0;
+}
+
+.telemedicine-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.telemedicine-hero {
+    background-color: #138808; /* Green */
+    color: #FFFFFF; /* White */
+    padding: 3rem 2rem;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.telemedicine-hero h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1.2rem;
+}
+
+.telemedicine-hero p {
+    font-size: 1.15rem;
+    max-width: 800px;
+    margin: 0 auto 1.8rem;
+    line-height: 1.6;
+}
+
+.telemedicine-btn {
+    background-color: #FF9933; /* Saffron */
+    color: #FFFFFF; /* White */
+    border: none;
+    padding: 12px 24px;
+    font-size: 1.05rem;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.telemedicine-btn:hover {
+    background-color: #e07e1b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.telemedicine-section-title {
+    text-align: center;
+    color: #138808; /* Green */
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.telemedicine-section-title::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: #FF9933; /* Saffron */
+    margin: 0.5rem auto 0;
+}
+
+.telemedicine-services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.8rem;
+}
+
+.telemedicine-service-card {
+    border: 2px solid #FF9933; /* Saffron */
+    border-radius: 8px;
+    padding: 1.8rem;
+    text-align: center;
+    transition: all 0.3s;
+    background-color: #FFFFFF; /* White */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.telemedicine-service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+}
+
+.telemedicine-service-icon {
+    font-size: 2.8rem;
+    color: #138808; /* Green */
+    margin-bottom: 1.2rem;
+}
+
+.telemedicine-service-title {
+    color: #138808; /* Green */
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+}
+
+.telemedicine-video-consultation {
+    background-color: #FFFFFF; /* White */
+    border: 2px solid #138808; /* Green */
+    border-radius: 8px;
+    padding: 2rem;
+    margin-top: 1rem;
+}
+
+.telemedicine-video-steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.telemedicine-video-step {
+    flex: 1 1 300px;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.telemedicine-video-step-icon {
+    background-color: #FF9933; /* Saffron */
+    color: #FFFFFF; /* White */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.telemedicine-video-step-content h4 {
+    color: #138808; /* Green */
+    margin-bottom: 0.5rem;
+}
+
+.telemedicine-how-it-works {
+    background-color: #138808; /* Green */
+    padding: 2.5rem;
+    color: #FFFFFF; /* White */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.telemedicine-steps {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.8rem;
+    margin-top: 2rem;
+}
+
+.telemedicine-step {
+    flex: 1 1 220px;
+    text-align: center;
+    padding: 1.8rem;
+    background-color: #FFFFFF; /* White */
+    border-radius: 8px;
+    color: #333;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.telemedicine-step:hover {
+    transform: translateY(-5px);
+}
+
+.telemedicine-step-number {
+    background-color: #FF9933; /* Saffron */
+    color: #FFFFFF; /* White */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.2rem;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.telemedicine-step h3 {
+    color: #138808; /* Green */
+    margin-bottom: 0.8rem;
+    font-size: 1.3rem;
+}
+
+.telemedicine-specialties {
+    background-color: #FFFFFF; /* White */
+    padding: 2rem;
+    border-radius: 8px;
+    border: 2px solid #FF9933; /* Saffron */
+}
+
+.telemedicine-specialty-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.telemedicine-specialty-item {
+    display: flex;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 1rem;
+    border-radius: 6px;
+    transition: all 0.3s;
+}
+
+.telemedicine-specialty-item:hover {
+    background-color: #e6f7e6;
+    transform: translateY(-3px);
+}
+
+.telemedicine-specialty-icon {
+    color: #138808; /* Green */
+    font-size: 1.5rem;
+    margin-right: 0.8rem;
+}
+
+.telemedicine-specialty-name {
+    font-weight: 500;
+}
+
+.telemedicine-booking-container {
+    margin-top: 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    background-color: #FFFFFF; /* White */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.telemedicine-booking-info {
+    padding: 2rem;
+    background-color: #138808; /* Green */
+    color: #FFFFFF; /* White */
+}
+
+.telemedicine-booking-info h3 {
+    margin-bottom: 1.5rem;
+    font-size: 1.6rem;
+}
+
+.telemedicine-booking-info ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.telemedicine-booking-info li {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.telemedicine-booking-info li::before {
+    content: "✓";
+    margin-right: 0.8rem;
+    color: #FF9933; /* Saffron */
+    font-weight: bold;
+}
+
+.telemedicine-booking-form {
+    padding: 2rem;
+}
+
+.telemedicine-form-group {
+    margin-bottom: 1.2rem;
+}
+
+.telemedicine-form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #138808; /* Green */
+    font-weight: 500;
+}
+
+.telemedicine-form-group input,
+.telemedicine-form-group select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.telemedicine-form-group input:focus,
+.telemedicine-form-group select:focus {
+    outline: none;
+    border-color: #138808; /* Green */
+}
+
+.telemedicine-cta {
+    background-color: #FF9933; /* Saffron */
+    padding: 2.5rem;
+    text-align: center;
+    color: #FFFFFF; /* White */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.telemedicine-cta h2 {
+    font-size: 2rem;
+    margin-bottom: 1.2rem;
+}
+
+.telemedicine-cta p {
+    max-width: 100%; /* Add a valid property name and value */
+    margin: 0 auto 1.5rem;
+    font-size: 1.1rem;
+}
