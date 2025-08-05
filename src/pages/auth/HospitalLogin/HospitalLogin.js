@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import './styles/CommonLogin.css'; // Reusing the same CSS file
-import { auth } from '../../config/firebaseConfig';
+import { auth } from '../../../config/firebaseConfig';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import './HospitalLogin.css';
 
 function HospitalLogin() {
   const [loginIdentifier, setLoginIdentifier] = useState('');
@@ -20,7 +20,7 @@ function HospitalLogin() {
     }
   }, []);
 
-  // Handle Login Submission
+  // Handle login form submit
   const handleLogin = async (e) => {
     e.preventDefault();
     setErrorMessage('');
@@ -37,7 +37,6 @@ function HospitalLogin() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ identifier: loginIdentifier, password: loginPassword }),
       });
-
       const result = await response.json();
       if (result.status === 'success') {
         if (rememberMe) {
@@ -47,16 +46,16 @@ function HospitalLogin() {
         }
         window.location.href = '/hospital/dashboard';
       } else {
-        setErrorMessage(result.message);
+        setErrorMessage(result.message || 'Login failed.');
       }
-    } catch (error) {
+    } catch (e) {
       setErrorMessage('Failed to connect to the server.');
     } finally {
       setLoading(false);
     }
   };
 
-  // Google Sign-In
+  // Google sign-in
   const handleGoogleSignIn = async () => {
     const provider = new GoogleAuthProvider();
     setLoading(true);
@@ -66,18 +65,15 @@ function HospitalLogin() {
       localStorage.setItem('hospitalId', user.email);
       window.location.href = '/hospital/dashboard';
     } catch (error) {
-      console.error('Google sign-in failed:', error);
       setErrorMessage('Google sign-in failed.');
     } finally {
       setLoading(false);
     }
   };
 
-  // Password Visibility Toggle
-  const togglePasswordVisibility = (inputId) => {
+  // Password toggle
+  const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
-    const input = document.getElementById(inputId);
-    input.type = input.type === 'password' ? 'text' : 'password';
   };
 
   return (
@@ -87,8 +83,9 @@ function HospitalLogin() {
         <div className="animated-shape shape2"></div>
         <div className="animated-shape shape3"></div>
       </div>
-      
+
       <div className="auth-card">
+        {/* Sidebar */}
         <div className="auth-sidebar">
           <div className="brand-container">
             <img src="/LOGO.png" alt="Bharath MediCare Logo" className="logo" />
@@ -96,7 +93,9 @@ function HospitalLogin() {
           </div>
           <div className="sidebar-content">
             <h2 className="welcome-text">Hospital Administration Portal</h2>
-            <p className="sidebar-message">Manage your hospital operations, staff, and patient care from one central dashboard.</p>
+            <p className="sidebar-message">
+              Manage your hospital operations, staff, and patient care from one central dashboard.
+            </p>
             <div className="feature-list">
               <div className="feature-item">
                 <div className="feature-icon">🏥</div>
@@ -113,14 +112,15 @@ function HospitalLogin() {
             </div>
           </div>
         </div>
-        
+
+        {/* Login Form */}
         <div className="auth-form-container">
           <div className="auth-header">
             <h2 className="auth-title">Welcome Back, Administrator</h2>
             <p className="auth-subtitle">Sign in to access your hospital dashboard</p>
           </div>
 
-          {/* Error Message */}
+          {/* Error message */}
           {errorMessage && (
             <div className="error-container">
               <div className="error-icon">⚠️</div>
@@ -128,7 +128,7 @@ function HospitalLogin() {
             </div>
           )}
 
-          {/* Form */}
+          {/* Form wrapper */}
           <div className="auth-form-wrapper">
             {loading && (
               <div className="loading-overlay">
@@ -160,7 +160,7 @@ function HospitalLogin() {
                 <div className="input-container">
                   <span className="input-icon">🔒</span>
                   <input
-                    type="password"
+                    type={passwordVisible ? "text" : "password"}
                     id="loginPassword"
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
@@ -170,7 +170,8 @@ function HospitalLogin() {
                   <button 
                     type="button" 
                     className="password-toggle"
-                    onClick={() => togglePasswordVisibility('loginPassword')}
+                    onClick={togglePasswordVisibility}
+                    aria-label="Toggle password visibility"
                   >
                     {passwordVisible ? '👁️' : '👁️‍🗨️'}
                   </button>
@@ -199,16 +200,21 @@ function HospitalLogin() {
               <span>OR</span>
             </div>
 
-            <button className="google-btn" onClick={handleGoogleSignIn} disabled={loading}>
+            <button
+              className="google-btn"
+              onClick={handleGoogleSignIn}
+              disabled={loading}
+              aria-label="Continue with Google"
+            >
               <img src="/google-icon.png" alt="Google Icon" className="google-icon" />
               <span>Continue with Google</span>
             </button>
           </div>
-          
+
           <div className="auth-footer">
             <p>
-              Don't have an account?
-              <a href="hospital-registration" className="toggle-link">
+              Don't have an account?{' '}
+              <a href="/hospital-registration" className="toggle-link">
                 Register here
               </a>
             </p>
