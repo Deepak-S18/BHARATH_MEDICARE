@@ -9,12 +9,13 @@ import Reviews from './pages/home/Reviews';
 import Appointment from './pages/services/Appointment';
 import HospitalRegistration from './pages/hospital/HospitalRegistration';
 import TelemedicineServices from './pages/services/TelemedicineServices/TelemedicineServices';
-import NFCPatientScanner from './pages/card/NFCPatientScsanner';
+import BarcodePatientScanner from './pages/card/BarcodePatientScanner';
 import PatientDashboard from './pages/patient/PatientDashboard';
 import DoctorDashboard from './pages/doctor/DoctorDashboard';
 import PatientLogin1 from './pages/auth/PatientLogin/PatientLogin';
 import HospitalLogin from './pages/auth/HospitalLogin/HospitalLogin';
 import DoctorLogin from './pages/auth/DoctorLogin/DoctorLogin';
+import LandingLoginPage from './pages/home/LandingLoginPage';
 
 function App() {
   return (
@@ -32,12 +33,14 @@ function App() {
         <Route path="/appointment" element={<Appointment/>}/>
         <Route path="/hospital-registration" element={<HospitalRegistration/>}/>
         <Route path="/telemedicine" element={<TelemedicineServices/>}/>
-        <Route path="/NFCPatientScanner" element={<NFCPatientScanner/>}/>
+        <Route path="/barcode-scanner" element={<BarcodePatientScanner/>}/>
         <Route path="/patient-dashboard" element={<PatientDashboard/>} />
         <Route path="/doctor-dashboard" element={<DoctorDashboard/>} />
         <Route path="/patient-login" element={<PatientLogin1 />} />
         <Route path="/hospital-login" element={<HospitalLogin />} />
         <Route path="/doctor-login" element={<DoctorLogin />} />
+        <Route path="/landing-login" element={<LandingLoginPage />} />
+
         
         {/* Catch-all Route */}
         <Route path="*" element={<Home />} />
